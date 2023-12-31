@@ -16,6 +16,9 @@ alki_head_middle = 'res//alki//head_middle.png'
 alki_head_right = 'res//alki//head_right.png'
 alki_head_left = 'res//alki//head_left.png'
 
+alki_hair = 'res//alki//hair.png'
+alki_tail = 'res//alki//tail.png'
+
 alki_eye_middle = 'res//alki//face//eye_middle.png'
 alki_dot_middle = 'res//alki//face//dot_middle.png'
 alki_brow_middle = 'res//alki//face//brow_middle.png'

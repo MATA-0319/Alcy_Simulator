@@ -10,6 +10,9 @@ def load_alki_file(a):
         a.head_right = load_image(alki_head_right)
         a.head_left = load_image(alki_head_left)
 
+        a.hair = load_image(alki_hair)
+        a.tail = load_image(alki_tail)
+
         a.eye_middle = load_image(alki_eye_middle)
         a.dot_middle = load_image(alki_dot_middle)
         a.brow_middle = load_image(alki_brow_middle)

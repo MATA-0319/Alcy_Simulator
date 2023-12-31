@@ -8,6 +8,8 @@ class Alki:
     eye_middle, dot_middle, brow_middle = None, None, None
     eye_right, dot_right, brow_right = None, None, None
     eye_left, dot_left, brow_left = None, None, None
+    hair = None
+    tail = None
 
     def __init__(self, m, e):
         load_alki_file(Alki)
@@ -21,13 +23,16 @@ class Alki:
         self.eye_x, self.eye_y = self.x, self.y  # 눈, 눈동자, 눈썹 위치
         self.dot_x, self.dot_y = self.x, self.y
         self.brow_x, self.brow_y = self.x, self.y
+        self.hair_y = self.y - 700
 
         self.state = 'middle'  # 머리 향하는 방향
 
     def draw(self):
         global ex, ey, eye_pos_x, eye_pos_y, dot_pos_x, dot_pos_y, brow_pos_x, brow_pos_y
 
+        Alki.tail.rotate_draw(0, self.x - 300 + ex, self.y - 700 + ey, self.size, self.size)
         Alki.body.rotate_draw(0, self.x + ex, self.y - 700 + ey, self.size, self.size)  # 사이즈는 화면 가로 길이를 기준으로 정함
+        Alki.hair.rotate_draw(0, self.x + ex, self.hair_y + ey, self.size, self.size)
 
         match self.state:
             case 'middle':
@@ -79,3 +84,4 @@ class Alki:
         self.eye_x, self.eye_y = self.x, self.y  # 눈, 눈동자, 눈썹 위치
         self.dot_x, self.dot_y = self.x, self.y
         self.brow_x, self.brow_y = self.x, self.y
+        self.hair_y = self.y - 700
