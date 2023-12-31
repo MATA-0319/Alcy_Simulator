@@ -35,7 +35,11 @@ def init_alki(self, m, e):
     self.time_measure = False  # 시간 측정 여부
 
     self.pat = False  # 쓰다듬을 수 있는 여부
-    self.num = 0
+    self.deg_head = 0
+    self.deg_tail = 0
+    self.num_head = 0
+    self.num_tail = 0
+    self.num_hair = 0
 
 
 def start_animation(self):
@@ -144,55 +148,65 @@ def blink(self):
 
 def update_pat(self):
     ts = game_framework.ts
-    self.num += ts / 80
+    self.num_head += ts / 80
+    self.num_hair += ts / 80
+    self.num_tail += ts / 200
+
+    self.deg_tail = math.sin(self.num_tail) * 200  # 꼬리 회전
+    self.deg_head = -math.sin(self.num_head) * 200  # 머리 회전
+    self.hair_y = math.sin(self.num_hair) * 200
+
+
+def init_deg(self):
+    if not self.m.click:
+        self.deg_head, self.num_head, self.deg_tail, self.num_tail = 0, 0, 0, 0  # 쓰다듬기 안 하면 초기화
+        self.num_hair = 0
 
 
 # 알키 출력
 def output(self, a):
-    a.tail.rotate_draw(0, self.x - (self.size / 4) + self.e.ex, self.e.ey, self.size, self.size)
-    a.body.rotate_draw(0, self.x + self.e.ex, self.e.ey, self.size, self.size)
-    a.hair.rotate_draw(0, self.x + self.e.ex, self.hair_y + self.e.ey, self.size, self.size)
-
     eye_result_x = self.eye_x + self.eye_pos_x + self.e.ex
     eye_result_y = self.eye_y + self.eye_pos_y + self.e.ey
     dot_result_x = self.dot_x + self.dot_pos_x + self.e.ex
     dot_result_y = self.dot_y + self.dot_pos_y + self.e.ey
     brow_result_x = self.brow_x + self.e.ex
     brow_result_y = self.brow_y + self.brow_pos_y + self.e.ey
+    deg = math.radians(self.deg_head) / 40
+
+    a.tail.rotate_draw(math.radians(self.deg_tail) / 30, self.x - (self.size / 4) + self.e.ex, self.e.ey, self.size, self.size)
+    a.body.rotate_draw(-math.radians(self.deg_head) / 100, self.x + self.e.ex, self.e.ey, self.size, self.size)
+    a.hair.rotate_draw(0, self.x + self.e.ex, self.hair_y / 10 + self.e.ey, self.size, self.size)
 
     match self.state:
         case 'middle':
             if self.m.click and self.pat:
-                deg = -math.sin(self.num) * 200
-                a.head_middle.rotate_draw(math.radians(deg) / 40, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-                a.blink_middle.rotate_draw(math.radians(deg) / 40, eye_result_x, eye_result_y, self.size, self.size)
+                a.head_middle.rotate_draw(deg, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
+                a.blink_middle.rotate_draw(deg, eye_result_x, eye_result_y, self.size, self.size)
+                a.brow_middle.rotate_draw(deg, brow_result_x, brow_result_y, self.size, self.size)
 
             else:
-                self.num = 0
-                deg = 0
-                a.head_middle.rotate_draw(deg, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-                if not self.blink:
+                a.head_middle.rotate_draw(0, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
+                if self.blink:
+                    a.blink_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+                else:
                     a.eye_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
                     a.dot_middle.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
-                else:
-                    a.blink_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
-
-            a.brow_middle.rotate_draw(math.radians(deg) / 40, brow_result_x, brow_result_y, self.size, self.size)
+                a.brow_middle.rotate_draw(0, brow_result_x, brow_result_y, self.size, self.size)
 
         case 'right':
             a.head_right.rotate_draw(0, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-            if not self.blink:
+            if self.blink:
+                a.blink_right.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+            else:
                 a.eye_right.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
                 a.dot_right.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
-            else:
-                a.blink_right.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
             a.brow_right.rotate_draw(0, brow_result_x, brow_result_y, self.size, self.size)
 
         case 'left':
             a.head_left.rotate_draw(0, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-            if not self.blink:
+            if self.blink:
+                a.blink_left.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+            else:
                 a.eye_left.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
                 a.dot_left.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
-            else:
-                a.blink_left.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
             a.brow_left.rotate_draw(0, brow_result_x, brow_result_y, self.size, self.size)
