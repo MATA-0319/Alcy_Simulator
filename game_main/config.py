@@ -41,3 +41,9 @@ background_image = 'res//background.png'
 # 커서 경로
 cursor_image = 'res//cursor.png'
 cursor_hand_image = 'res//cursor_hand.png'
+
+# ui 경로
+pause_back = 'res//pause_background.png'
+pause_button_image = 'res//pause_button.png'
+icon_exit_image = 'res//icon_exit.png'
+

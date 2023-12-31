@@ -1,5 +1,5 @@
-from game_class.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation, blink, \
-    update_pat, init_deg
+from game_class.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation, update_blink, \
+    update_pat, init_deg, pause_animation, return_animation
 from game_class.file_loader import load_alki_file
 from game_main.config import *
 from pico2d import *
@@ -18,7 +18,7 @@ class Alki:
         output(self, Alki)
 
     def update(self):
-        blink(self)
+        update_blink(self)
 
         if self.start:
             start_animation(self)
@@ -29,6 +29,13 @@ class Alki:
             move_eye(self)
 
         if self.pat and self.m.click:
-            update_pat(self)
+            if game_framework.mode == 'play':
+                update_pat(self)
 
         init_deg(self)
+
+        if game_framework.mode == 'pause':
+            pause_animation(self)
+
+        if game_framework.mode == 'play':
+            return_animation(self)

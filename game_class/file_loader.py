@@ -28,14 +28,3 @@ def load_alki_file(a):
         a.blink_middle = load_image(alki_blink_middle)
         a.blink_right = load_image(alki_blink_right)
         a.blink_left = load_image(alki_blink_left)
-
-
-def load_background_file(a):
-    if not a.image:
-        a.image = load_image(background_image)
-
-
-def load_cursor_file(a):
-    if not a.cursor:
-        a.cursor = load_image(cursor_image)
-        a.cursor_hand = load_image(cursor_hand_image)

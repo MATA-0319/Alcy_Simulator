@@ -1,4 +1,4 @@
-from game_class.class_cursor import Cursor
+from ui_class.class_cursor import Cursor
 from game_main.config import *
 import math
 import time
@@ -17,17 +17,20 @@ def init_alki(self, m, e):
 
     self.head_x = WIDTH / 2  # 머리 위치
     self.head_y = self.size / 1.8
+    self.state = 'middle'  # 머리 향하는 방향
+
+    self.body_y = 0  # 몸 y좌표
 
     self.eye_x, self.eye_y = self.x, self.head_y  # 눈, 눈동자, 눈썹 위치
     self.dot_x, self.dot_y = self.x, self.head_y
     self.brow_x, self.brow_y = self.x, self.head_y
-    self.hair_y = 0  # 땋은 머리 위치
 
     self.eye_pos_x, self.eye_pos_y = 0, 0  # 추가 움직임 좌표
     self.dot_pos_x, self.dot_pos_y = 0, 0
     self.brow_pos_x, self.brow_pos_y = 0, 0
+    self.hair_pos = 0
 
-    self.state = 'middle'  # 머리 향하는 방향
+    self.hair_y = 0  # 땋은 머리 y 위치
 
     self.start = False  # 게임 시작 시 크기가 커지는 애니메이션 출력
     self.control = False  # 크기가 커지는 애니메이션이 끝나야 컨트롤 가능
@@ -35,15 +38,42 @@ def init_alki(self, m, e):
     self.time_measure = False  # 시간 측정 여부
 
     self.pat = False  # 쓰다듬을 수 있는 여부
-    self.deg_head = 0
+    self.deg_head = 0  # 최종 각도
     self.deg_tail = 0
-    self.num_head = 0
+    self.num_head = 0  # 삼각함수 변수
     self.num_tail = 0
     self.num_hair = 0
+
+    self.pause_acc = 0  # 일시정지 전환 시 사용하는 가속값
+
+
+def pause_animation(self):
+    ts = game_framework.ts
+    self.head_y += self.pause_acc * ts
+    self.body_y += self.pause_acc * ts
+    self.hair_y += self.pause_acc * ts
+
+    self.pause_acc -= ts / 20
+
+    if self.pause_acc < 0:
+        self.pause_acc = 0
+
+
+def return_animation(self):
+    ts = game_framework.ts
+    self.head_y -= self.pause_acc * ts
+    self.body_y -= self.pause_acc * ts
+    self.hair_y -= self.pause_acc * ts
+
+    self.pause_acc -= ts / 20
+
+    if self.pause_acc < 0:
+        self.pause_acc = 0
 
 
 def start_animation(self):
     ts = game_framework.ts
+
     if self.size < WIDTH / 2:
         prev_size = self.size
         self.size += ts * 2
@@ -109,24 +139,24 @@ def move_eye(self):
 
     #  알키는 마우스를 따라 본다
     self.eye_pos_x = (self.m.mx - self.eye_x) / 20
-    self.eye_pos_y = (self.m.my - self.eye_y) / 18
+    self.eye_pos_y = (self.m.my - self.eye_y) / 20
     self.dot_pos_x = (self.m.mx - self.dot_x) / 15
-    self.dot_pos_y = (self.m.my - self.dot_y) / 13
+    self.dot_pos_y = (self.m.my - self.dot_y) / 15
     self.brow_pos_y = (self.m.my - self.brow_y) / 25
     # print(self.dot_pos_x, self.eye_pos_x, self.m.mx)
 
-    if self.eye_pos_x > WIDTH / 60:
-        self.eye_pos_x = WIDTH / 60
-    elif self.eye_pos_x < -WIDTH / 60:
-        self.eye_pos_x = -WIDTH / 60
+    if self.eye_pos_x > WIDTH / 70:
+        self.eye_pos_x = WIDTH / 70
+    elif self.eye_pos_x < -WIDTH / 70:
+        self.eye_pos_x = -WIDTH / 70
 
-    if self.dot_pos_x > WIDTH / 40:
-        self.dot_pos_x = WIDTH / 40
-    elif self.dot_pos_x < -WIDTH / 40:
-        self.dot_pos_x = -WIDTH / 40
+    if self.dot_pos_x > WIDTH / 50:
+        self.dot_pos_x = WIDTH / 50
+    elif self.dot_pos_x < -WIDTH / 50:
+        self.dot_pos_x = -WIDTH / 50
 
 
-def blink(self):
+def update_blink(self):
     global prev_time, rand_time
 
     if not self.time_measure:
@@ -154,13 +184,13 @@ def update_pat(self):
 
     self.deg_tail = math.sin(self.num_tail) * 200  # 꼬리 회전
     self.deg_head = -math.sin(self.num_head) * 200  # 머리 회전
-    self.hair_y = math.sin(self.num_hair) * 200
+    self.hair_pos = math.sin(self.num_hair) * 200
 
 
 def init_deg(self):
     if not self.m.click:
         self.deg_head, self.num_head, self.deg_tail, self.num_tail = 0, 0, 0, 0  # 쓰다듬기 안 하면 초기화
-        self.num_hair = 0
+        self.num_hair, self.hair_pos = 0, 0
 
 
 # 알키 출력
@@ -173,9 +203,9 @@ def output(self, a):
     brow_result_y = self.brow_y + self.brow_pos_y + self.e.ey
     deg = math.radians(self.deg_head) / 40
 
-    a.tail.rotate_draw(math.radians(self.deg_tail) / 30, self.x - (self.size / 4) + self.e.ex, self.e.ey, self.size, self.size)
-    a.body.rotate_draw(-math.radians(self.deg_head) / 100, self.x + self.e.ex, self.e.ey, self.size, self.size)
-    a.hair.rotate_draw(0, self.x + self.e.ex, self.hair_y / 10 + self.e.ey, self.size, self.size)
+    a.tail.rotate_draw(math.radians(self.deg_tail) / 30, self.x - (self.size / 4) + self.e.ex, self.body_y + self.e.ey, self.size, self.size)
+    a.body.rotate_draw(-math.radians(self.deg_head) / 100, self.x + self.e.ex, self.body_y + self.e.ey, self.size, self.size)
+    a.hair.rotate_draw(0, self.x + self.e.ex, self.hair_pos / 10 + self.e.ey + self.hair_y, self.size, self.size)
 
     match self.state:
         case 'middle':
