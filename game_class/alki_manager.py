@@ -1,6 +1,8 @@
 from game_class.class_cursor import Cursor
 from game_main.config import *
 import math
+import time
+import random
 
 from game_mods import play_mode
 from game_work import game_framework, game_manager
@@ -29,8 +31,8 @@ def init_alki(self, m, e):
 
     self.start = False  # 게임 시작 시 크기가 커지는 애니메이션 출력
     self.control = False  # 크기가 커지는 애니메이션이 끝나야 컨트롤 가능
-
-    print(self.size)
+    self.blink = False  # 눈 깜빡임 여부
+    self.time_measure = False  # 시간 측정 여부
 
 
 def start_animation(self):
@@ -117,6 +119,25 @@ def move_eye(self):
         self.dot_pos_x = -WIDTH / 40
 
 
+def blink(self):
+    global prev_time, rand_time
+    if not self.time_measure:
+        prev_time = time.time()
+        rand_time = random.randint(1, 4)
+        self.time_measure = True
+
+    if self.time_measure:
+        cur_time = time.time() - prev_time
+        if not self.blink:
+            if cur_time >= rand_time:
+                self.blink = True
+                self.time_measure = False
+        else:
+            if cur_time >= 0.2:
+                self.blink = False
+                self.time_measre = False
+
+
 # 알키 출력
 def output(self, a):
     a.tail.rotate_draw(0, self.x - (self.size / 4) + self.e.ex, self.e.ey, self.size, self.size)
@@ -133,20 +154,34 @@ def output(self, a):
     match self.state:
         case 'middle':
             a.head_middle.rotate_draw(0, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-            a.eye_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
-            a.dot_middle.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
+
+            if not self.blink:
+                a.eye_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+                a.dot_middle.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
+            else:
+                a.blink_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
             a.brow_middle.rotate_draw(0, brow_result_x, brow_result_y, self.size, self.size)
 
         case 'right':
             deg = math.atan2(self.m.my + self.size / 5 - self.head_y, self.m.mx - self.head_x)
+
             a.head_right.rotate_draw(deg / 10, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-            a.eye_right.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
-            a.dot_right.rotate_draw(deg / 10, dot_result_x, dot_result_y, self.size, self.size)
+
+            if not self.blink:
+                a.eye_right.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
+                a.dot_right.rotate_draw(deg / 10, dot_result_x, dot_result_y, self.size, self.size)
+            else:
+                a.blink_right.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
             a.brow_right.rotate_draw(deg / 10, brow_result_x, brow_result_y, self.size, self.size)
 
         case 'left':
             deg = math.atan2(self.head_y - self.size / 5 - self.m.my, self.head_x - self.m.mx)
+
             a.head_left.rotate_draw(deg / 10, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-            a.eye_left.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
-            a.dot_left.rotate_draw(deg / 10, dot_result_x, dot_result_y, self.size, self.size)
+
+            if not self.blink:
+                a.eye_left.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
+                a.dot_left.rotate_draw(deg / 10, dot_result_x, dot_result_y, self.size, self.size)
+            else:
+                a.blink_left.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
             a.brow_left.rotate_draw(deg / 10, brow_result_x, brow_result_y, self.size, self.size)

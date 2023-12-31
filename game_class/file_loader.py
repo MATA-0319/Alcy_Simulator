@@ -25,6 +25,10 @@ def load_alki_file(a):
         a.dot_left = load_image(alki_dot_left)
         a.brow_left = load_image(alki_brow_left)
 
+        a.blink_middle = load_image(alki_blink_middle)
+        a.blink_right = load_image(alki_blink_right)
+        a.blink_left = load_image(alki_blink_left)
+
 
 def load_background_file(a):
     if not a.image:

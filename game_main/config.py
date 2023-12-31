@@ -31,6 +31,10 @@ alki_eye_left = 'res//alki//face//eye_left.png'
 alki_dot_left = 'res//alki//face//dot_left.png'
 alki_brow_left = 'res//alki//face//brow_left.png'
 
+alki_blink_middle = 'res//alki//face//blink_middle.png'
+alki_blink_right = 'res//alki//face//blink_right.png'
+alki_blink_left = 'res//alki//face//blink_left.png'
+
 # 배경 경로
 background_image = 'res//background.png'
 

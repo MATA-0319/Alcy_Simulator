@@ -1,4 +1,4 @@
-from game_class.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation
+from game_class.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation, blink
 from game_class.file_loader import load_alki_file
 from game_main.config import *
 from pico2d import *
@@ -7,12 +7,7 @@ from game_work import game_framework
 
 
 class Alki:
-    head_middle, head_right, head_left, body = None, None, None, None
-    eye_middle, dot_middle, brow_middle = None, None, None
-    eye_right, dot_right, brow_right = None, None, None
-    eye_left, dot_left, brow_left = None, None, None
-    hair = None
-    tail = None
+    body = None
 
     def __init__(self, m, e):
         load_alki_file(Alki)
@@ -22,6 +17,8 @@ class Alki:
         output(self, Alki)
 
     def update(self):
+        blink(self)
+
         if self.start:
             start_animation(self)
 
