@@ -13,3 +13,16 @@ def load_alki_file(a):
         a.eye_middle = load_image(alki_eye_middle)
         a.dot_middle = load_image(alki_dot_middle)
         a.brow_middle = load_image(alki_brow_middle)
+
+        a.eye_right = load_image(alki_eye_right)
+        a.dot_right = load_image(alki_dot_right)
+        a.brow_right = load_image(alki_brow_right)
+
+        a.eye_left = load_image(alki_eye_left)
+        a.dot_left = load_image(alki_dot_left)
+        a.brow_left = load_image(alki_brow_left)
+
+
+def load_background_file(a):
+    if not a.image:
+        a.image = load_image(background_image)

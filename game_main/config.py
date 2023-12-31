@@ -19,3 +19,14 @@ alki_head_left = 'res//alki//head_left.png'
 alki_eye_middle = 'res//alki//face//eye_middle.png'
 alki_dot_middle = 'res//alki//face//dot_middle.png'
 alki_brow_middle = 'res//alki//face//brow_middle.png'
+
+alki_eye_right = 'res//alki//face//eye_right.png'
+alki_dot_right = 'res//alki//face//dot_right.png'
+alki_brow_right = 'res//alki//face//brow_right.png'
+
+alki_eye_left = 'res//alki//face//eye_left.png'
+alki_dot_left = 'res//alki//face//dot_left.png'
+alki_brow_left = 'res//alki//face//brow_left.png'
+
+# 배경 경로
+background_image = 'res//background.png'

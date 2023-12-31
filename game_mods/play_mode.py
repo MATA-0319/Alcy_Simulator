@@ -1,6 +1,8 @@
 from pico2d import *
 
 from game_class.class_alki import Alki
+from game_class.class_background import Background
+from game_class.class_effect import Effect
 from game_class.class_mouse_input import MouseInput
 from game_work import game_manager, game_framework
 from game_main.config import *
@@ -27,9 +29,13 @@ def init():
     global mouse_input
 
     mouse_input = MouseInput()  # 마우스 입력
-    alki = Alki(mouse_input)  # 알키
+    effect = Effect(mouse_input)
+    background = Background(effect)  # 배경
+    alki = Alki(mouse_input, effect)  # 알키
 
     game_manager.add_object(mouse_input, 0)
+    game_manager.add_object(effect, 0)
+    game_manager.add_object(background, 0)
     game_manager.add_object(alki, 1)
 
 
