@@ -27,7 +27,7 @@ class Alki:
     def draw(self):
         global ex, ey, eye_pos_x, eye_pos_y, dot_pos_x, dot_pos_y, brow_pos_x, brow_pos_y
 
-        Alki.body.rotate_draw(0, self.x + ex, self.y - 700 + ey, WIDTH / 2, WIDTH / 2)  # 사이즈는 화면 가로 길이를 기준으로 정함
+        Alki.body.rotate_draw(0, self.x + ex, self.y - 700 + ey, self.size, self.size)  # 사이즈는 화면 가로 길이를 기준으로 정함
 
         match self.state:
             case 'middle':
@@ -51,13 +51,15 @@ class Alki:
     def update(self):
         global ex, ey, eye_pos_x, eye_pos_y, dot_pos_x, dot_pos_y, brow_pos_x, brow_pos_y
 
-        if self.m.x <= self.x - 700:
-            self.state = 'left'
-        elif self.m.x >= self.x + 700:
+        # 마우스 위치에 따라 바라보는 방향이 달라진다
+        if self.m.x >= self.x + 700:
             self.state = 'right'
+        elif self.m.x <= self.x - 700:
+            self.state = 'left'
         else:
             self.state = 'middle'
 
+        # 화면 효과
         ex = self.e.ex
         ey = self.e.ey
 
@@ -73,6 +75,7 @@ class Alki:
         else:
             brow_pos_y = 0
 
+        # 알키의 모든 부분은 하나의 좌표로 통일된다
         self.eye_x, self.eye_y = self.x, self.y  # 눈, 눈동자, 눈썹 위치
         self.dot_x, self.dot_y = self.x, self.y
         self.brow_x, self.brow_y = self.x, self.y
