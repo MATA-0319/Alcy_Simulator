@@ -10,9 +10,12 @@ print(WIDTH, HEIGHT)
 PIXEL_RATIO = 150
 TS = (5 * PIXEL_RATIO)  # Time Sync, 게임에서 사용하는 시간 동기화 비율
 
-
 # 알키 이미지 경로
+alki_body = 'res//alki//body.png'
 alki_head_middle = 'res//alki//head_middle.png'
 alki_head_right = 'res//alki//head_right.png'
 alki_head_left = 'res//alki//head_left.png'
-alki_body = 'res//alki//body.png'
+
+alki_eye_middle = 'res//alki//face//eye_middle.png'
+alki_dot_middle = 'res//alki//face//dot_middle.png'
+alki_brow_middle = 'res//alki//face//brow_middle.png'

@@ -1,12 +1,16 @@
 from pico2d import *
 
-from game_class.classes import Alki
+from game_class.class_alki import Alki
+from game_class.class_mouse_input import MouseInput
 from game_work import game_manager, game_framework
 from game_main.config import *
 
 
 def handle_events():
+    global mouse_input
+
     events = get_events()
+
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.stop_run()
@@ -15,9 +19,17 @@ def handle_events():
             if event.key == SDLK_ESCAPE:
                 game_framework.stop_run()
 
+        if event.type == SDL_MOUSEMOTION:  # 게임 마우스 입력
+            mouse_input.x, mouse_input.y = event.x, HEIGHT - 1 - event.y
+
 
 def init():
-    alki = Alki()
+    global mouse_input
+
+    mouse_input = MouseInput()  # 마우스 입력
+    alki = Alki(mouse_input)  # 알키
+
+    game_manager.add_object(mouse_input, 0)
     game_manager.add_object(alki, 1)
 
 
