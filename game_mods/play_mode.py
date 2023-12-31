@@ -1,11 +1,11 @@
 from pico2d import *
 
+from game_class.classes import Alki
 from game_work import game_manager, game_framework
 from game_main.config import *
 
 
 def handle_events():
-    global image, image2, image3
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
@@ -17,7 +17,8 @@ def handle_events():
 
 
 def init():
-    pass
+    alki = Alki()
+    game_manager.add_object(alki, 1)
 
 
 def update():

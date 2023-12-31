@@ -4,9 +4,15 @@ from tkinter import *
 root = Tk()
 WIDTH = root.winfo_screenwidth()
 HEIGHT = root.winfo_screenheight()
-
-# 픽셀 비율
-PIXEL_RATIO = 150  # 1미터 = 150픽셀
+print(WIDTH, HEIGHT)
 
 # 게임 전체 속도
+PIXEL_RATIO = 150
 TS = (5 * PIXEL_RATIO)  # Time Sync, 게임에서 사용하는 시간 동기화 비율
+
+
+# 알키 이미지 경로
+alki_head_middle = 'res//alki//head_middle.png'
+alki_head_right = 'res//alki//head_right.png'
+alki_head_left = 'res//alki//head_left.png'
+alki_body = 'res//alki//body.png'
