@@ -40,3 +40,4 @@ background_image = 'res//background.png'
 
 # 커서 경로
 cursor_image = 'res//cursor.png'
+cursor_hand_image = 'res//cursor_hand.png'

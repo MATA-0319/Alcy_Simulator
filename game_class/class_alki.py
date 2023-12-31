@@ -1,4 +1,5 @@
-from game_class.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation, blink
+from game_class.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation, blink, \
+    update_pat
 from game_class.file_loader import load_alki_file
 from game_main.config import *
 from pico2d import *
@@ -26,3 +27,6 @@ class Alki:
             set_state(self)
             head_animation(self)
             move_eye(self)
+
+        if self.pat:
+            update_pat(self)

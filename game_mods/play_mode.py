@@ -26,8 +26,18 @@ def handle_events():
                     alki.start = True
 
         if event.type == SDL_MOUSEMOTION:  # 게임 마우스 입력
-            if mouse_input.input:
+            if mouse_input.input and not(alki.pat and mouse_input.click):
                 mouse_input.mx, mouse_input.my = event.x, HEIGHT - 1 - event.y
+
+        if event.type == SDL_MOUSEBUTTONDOWN:
+            if event.button == SDL_BUTTON_LEFT:
+                if mouse_input.input:
+                    mouse_input.click = True
+
+        if event.type == SDL_MOUSEBUTTONUP:
+            if event.button == SDL_BUTTON_LEFT:
+                if mouse_input.input:
+                    mouse_input.click = False
 
 
 def init():

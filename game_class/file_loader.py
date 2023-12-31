@@ -36,5 +36,6 @@ def load_background_file(a):
 
 
 def load_cursor_file(a):
-    if not a.image:
-        a.image = load_image(cursor_image)
+    if not a.cursor:
+        a.cursor = load_image(cursor_image)
+        a.cursor_hand = load_image(cursor_hand_image)

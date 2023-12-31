@@ -34,6 +34,9 @@ def init_alki(self, m, e):
     self.blink = False  # 눈 깜빡임 여부
     self.time_measure = False  # 시간 측정 여부
 
+    self.pat = False  # 쓰다듬을 수 있는 여부
+    self.num = 0
+
 
 def start_animation(self):
     ts = game_framework.ts
@@ -49,7 +52,7 @@ def start_animation(self):
             self.head_y += (self.size - prev_size) / 1.8
             self.eye_y, self.dot_y, self.brow_y = self.head_y, self.head_y, self.head_y
 
-            cursor = Cursor(play_mode.mouse_input)
+            cursor = Cursor(play_mode.mouse_input, play_mode.alki)
             game_manager.add_object(cursor, 7)  # 커서가 나타난다
 
             self.start = False
@@ -139,6 +142,11 @@ def blink(self):
                 self.time_measre = False
 
 
+def update_pat(self):
+    ts = game_framework.ts
+    self.num += ts / 80
+
+
 # 알키 출력
 def output(self, a):
     a.tail.rotate_draw(0, self.x - (self.size / 4) + self.e.ex, self.e.ey, self.size, self.size)
@@ -154,13 +162,22 @@ def output(self, a):
 
     match self.state:
         case 'middle':
-            a.head_middle.rotate_draw(0, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-            if not self.blink:
-                a.eye_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
-                a.dot_middle.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
+            if self.m.click and self.pat:
+                deg = -math.sin(self.num) * 200
+                a.head_middle.rotate_draw(math.radians(deg) / 40, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
+                a.blink_middle.rotate_draw(math.radians(deg) / 40, eye_result_x, eye_result_y, self.size, self.size)
+
             else:
-                a.blink_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
-            a.brow_middle.rotate_draw(0, brow_result_x, brow_result_y, self.size, self.size)
+                self.num = 0
+                deg = 0
+                a.head_middle.rotate_draw(deg, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
+                if not self.blink:
+                    a.eye_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+                    a.dot_middle.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
+                else:
+                    a.blink_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+
+            a.brow_middle.rotate_draw(math.radians(deg) / 40, brow_result_x, brow_result_y, self.size, self.size)
 
         case 'right':
             a.head_right.rotate_draw(0, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
