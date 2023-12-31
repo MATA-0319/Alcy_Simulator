@@ -5,6 +5,8 @@ from game_main.config import TS
 running = None
 stack = None
 mode = 'play'
+
+
 # DEBUG = False
 
 

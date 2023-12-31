@@ -1,11 +1,11 @@
-from ui_class.class_cursor import Cursor
-from game_main.config import *
 import math
-import time
 import random
+import time
 
+from game_main.config import *
 from game_mods import play_mode
 from game_work import game_framework, game_manager
+from ui_class.class_cursor import Cursor
 
 
 def init_alki(self, m, e):
@@ -203,8 +203,10 @@ def output(self, a):
     brow_result_y = self.brow_y + self.brow_pos_y + self.e.ey
     deg = math.radians(self.deg_head) / 40
 
-    a.tail.rotate_draw(math.radians(self.deg_tail) / 30, self.x - (self.size / 4) + self.e.ex, self.body_y + self.e.ey, self.size, self.size)
-    a.body.rotate_draw(-math.radians(self.deg_head) / 100, self.x + self.e.ex, self.body_y + self.e.ey, self.size, self.size)
+    a.tail.rotate_draw(math.radians(self.deg_tail) / 30, self.x - (self.size / 4) + self.e.ex, self.body_y + self.e.ey,
+                       self.size, self.size)
+    a.body.rotate_draw(-math.radians(self.deg_head) / 100, self.x + self.e.ex, self.body_y + self.e.ey, self.size,
+                       self.size)
     a.hair.rotate_draw(0, self.x + self.e.ex, self.hair_pos / 10 + self.e.ey + self.hair_y, self.size, self.size)
 
     match self.state:

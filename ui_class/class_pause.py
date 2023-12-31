@@ -1,5 +1,7 @@
 from pico2d import *
+
 from game_main.config import *
+from game_mods import play_mode
 from game_work import game_framework
 
 
@@ -9,8 +11,10 @@ class Pause:
     def __init__(self, m):
         if not Pause.back:
             Pause.back = load_image(pause_back)
+            Pause.icon_pause = load_image(icon_pause_image)
             Pause.icon_exit = load_image(icon_exit_image)
             Pause.button = load_image(pause_button_image)
+            Pause.font = load_font(font, 100)
 
         self.m = m
 
@@ -23,11 +27,15 @@ class Pause:
         self.button_on = [False for i in range(1, 3)]
 
     def draw(self):
+        if play_mode.mouse_input.input:
+            Pause.font.draw(WIDTH - 380, self.y + 150 + 70, 'ESC', (255, 255, 255))
+            Pause.icon_pause.draw(WIDTH - 110, self.y + 150 + 85, 150, 150)
         Pause.back.draw(self.x, self.y, WIDTH, 300)
-        Pause.icon_exit.draw(WIDTH - 130, self.y + 10, 150, 150)
 
         if self.button_on[0]:
             Pause.button.draw(self.button_pos[0], self.y, 300, 300)
+
+        Pause.icon_exit.draw(WIDTH - 130, self.y + 10, 150, 150)
 
     def update(self):
         ts = game_framework.ts

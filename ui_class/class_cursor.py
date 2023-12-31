@@ -1,8 +1,8 @@
+import math
+
 from pico2d import *
 
 from game_main.config import WIDTH, cursor_image, cursor_hand_image
-import math
-
 from game_work import game_framework
 
 
@@ -22,7 +22,7 @@ class Cursor:
         # 커서 위치에 따라 커서 형태가 달라진다
         if game_framework.mode == 'play':
             if int(WIDTH / 2 - self.alki.size / 3) <= self.m.mx <= int(WIDTH / 2 + self.alki.size / 3) and \
-                    int(self.alki.head_y + self.alki.size / 50) <= self.m.my <= int(self.alki.head_y + self.alki.size / 4):
+                    int(self.alki.head_y + self.alki.size / 50) <= self.m.my <= int(self.alki.head_y+self.alki.size/4):
                 Cursor.cursor_hand.draw(self.x - 35, self.y + 35, 200, 200)
             else:
                 Cursor.cursor.draw(self.x, self.y, 70, 70)
@@ -48,7 +48,8 @@ class Cursor:
 
                 # 커서 위치에 따라 사용할 수 있는 기능이 달라진다
                 if int(WIDTH / 2 - self.alki.size / 3) <= self.m.mx <= int(WIDTH / 2 + self.alki.size / 3) and \
-                        int(self.alki.head_y + self.alki.size / 50) <= self.m.my <= int(self.alki.head_y + self.alki.size / 4):
+                        int(self.alki.head_y + self.alki.size / 50) <= self.m.my <= int(
+                    self.alki.head_y + self.alki.size / 4):
                     self.alki.pat = True
                 else:
                     self.alki.pat = False

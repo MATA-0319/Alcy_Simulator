@@ -1,8 +1,7 @@
-from game_class.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation, update_blink, \
+from game_class.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation, \
+    update_blink, \
     update_pat, init_deg, pause_animation, return_animation
 from game_class.file_loader import load_alki_file
-from game_main.config import *
-from pico2d import *
 
 from game_work import game_framework
 

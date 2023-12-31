@@ -2,10 +2,10 @@ from pico2d import *
 
 from game_class.class_alki import Alki
 from game_class.class_background import Background
+from game_main.config import *
+from game_work import game_manager, game_framework
 from ui_class.class_effect import Effect
 from ui_class.class_mouse_input import MouseInput
-from game_work import game_manager, game_framework
-from game_main.config import *
 from ui_class.class_pause import Pause
 
 
@@ -32,6 +32,7 @@ def pause_resume():
             alki.pause_acc = 5
             background.acc = 5
             pause.acc = 5
+            pause.y = 102
 
             game_framework.mode = 'play'
 
@@ -55,7 +56,7 @@ def handle_events():
                     alki.start = True
 
         if event.type == SDL_MOUSEMOTION:  # 게임 마우스 입력
-            if mouse_input.input and not(alki.pat and mouse_input.click):
+            if mouse_input.input and not (alki.pat and mouse_input.click):
                 mouse_input.mx, mouse_input.my = event.x, HEIGHT - 1 - event.y
 
         if event.type == SDL_MOUSEBUTTONDOWN:

@@ -1,7 +1,4 @@
 from game_main.config import *
-from game_mods import play_mode
-from game_work import game_framework
-import math
 
 
 #  화면 효과 클래스
