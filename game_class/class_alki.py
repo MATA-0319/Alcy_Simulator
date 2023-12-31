@@ -57,9 +57,9 @@ class Alki:
         global ex, ey, eye_pos_x, eye_pos_y, dot_pos_x, dot_pos_y, brow_pos_x, brow_pos_y
 
         # 마우스 위치에 따라 바라보는 방향이 달라진다
-        if self.m.x >= self.x + 700:
+        if self.m.mx >= self.x + 700:
             self.state = 'right'
-        elif self.m.x <= self.x - 700:
+        elif self.m.mx <= self.x - 700:
             self.state = 'left'
         else:
             self.state = 'middle'
@@ -69,10 +69,10 @@ class Alki:
         ey = self.e.ey
 
         #  알키는 마우스를 따라 본다
-        eye_pos_x = (self.m.x - self.eye_x) / 30
-        eye_pos_y = (self.m.y - self.eye_y) / 30
-        dot_pos_x = (self.m.x - self.dot_x) / 20
-        dot_pos_y = (self.m.y - self.dot_y) / 20
+        eye_pos_x = (self.m.mx - self.eye_x) / 30
+        eye_pos_y = (self.m.my - self.eye_y) / 29
+        dot_pos_x = (self.m.mx - self.dot_x) / 20
+        dot_pos_y = (self.m.my - self.dot_y) / 19
 
         # 눈이 특정 높이 이상 올라가면 눈썹이 같이 올라간다
         if eye_pos_y >= 10:

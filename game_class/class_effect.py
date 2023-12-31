@@ -13,8 +13,8 @@ class Effect:
         pass
 
     def update(self):
-        self.cam_x = (WIDTH / 2 - self.m.x) / 10
-        self.cam_y = (HEIGHT / 2 - self.m.y) / 10
+        self.cam_x = (WIDTH / 2 - self.m.mx) / 10
+        self.cam_y = (HEIGHT / 2 - self.m.my) / 10
 
         # 효과 추가 시 아래의 식에 더하여 일괄 처리한다
         self.ex = self.cam_x

@@ -29,3 +29,8 @@ def load_alki_file(a):
 def load_background_file(a):
     if not a.image:
         a.image = load_image(background_image)
+
+
+def load_cursor_file(a):
+    if not a.image:
+        a.image = load_image(cursor_image)

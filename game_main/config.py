@@ -33,3 +33,6 @@ alki_brow_left = 'res//alki//face//brow_left.png'
 
 # 배경 경로
 background_image = 'res//background.png'
+
+# 커서 경로
+cursor_image = 'res//cursor.png'
