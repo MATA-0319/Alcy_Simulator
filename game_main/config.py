@@ -7,7 +7,7 @@ HEIGHT = root.winfo_screenheight()
 print(WIDTH, HEIGHT)
 
 # 게임 전체 속도
-PIXEL_RATIO = 150
+PIXEL_RATIO = 80
 TS = (5 * PIXEL_RATIO)  # Time Sync, 게임에서 사용하는 시간 동기화 비율
 
 # 알키 이미지 경로
