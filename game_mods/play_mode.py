@@ -30,7 +30,13 @@ def pause_resume():
 
         case 'pause':
             alki.pause_acc = 5
+            alki.head_y = alki.size / 1.8 + 252
+            alki.body_y = 252
+            alki.hair_y = 252
+
             background.acc = 5
+            background.y = HEIGHT / 2 + 252
+
             pause.acc = 5
             pause.y = 102
 

@@ -45,8 +45,10 @@ cursor_hand_image = 'res//cursor_hand.png'
 # ui 경로
 pause_back = 'res//pause_background.png'
 pause_button_image = 'res//pause_button.png'
+menu_button_image = 'res//menu_button.png'
 icon_pause_image = 'res//icon_pause.png'
 icon_exit_image = 'res//icon_exit.png'
+icon_info_image = 'res//icon_info.png'
 
 # 폰트 경로
 font = 'res//font//AppleSDGothic.ttf'
