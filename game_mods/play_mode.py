@@ -10,7 +10,7 @@ from game_main.config import *
 
 
 def handle_events():
-    global mouse_input
+    global mouse_input, alki
 
     events = get_events()
 
@@ -21,16 +21,19 @@ def handle_events():
         if event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE:
                 game_framework.stop_run()
+            if event.key == SDLK_SPACE:  # 스페이스바로 게임 시작
+                if not mouse_input.input:
+                    alki.start = True
 
         if event.type == SDL_MOUSEMOTION:  # 게임 마우스 입력
-            mouse_input.mx, mouse_input.my = event.x, HEIGHT - 1 - event.y
+            if mouse_input.input:
+                mouse_input.mx, mouse_input.my = event.x, HEIGHT - 1 - event.y
 
 
 def init():
-    global mouse_input
+    global mouse_input, alki
 
     mouse_input = MouseInput()  # 마우스 입력
-    cursor = Cursor(mouse_input)
     effect = Effect(mouse_input)
 
     background = Background(effect)  # 배경
@@ -40,8 +43,6 @@ def init():
     game_manager.add_object(effect, 0)
     game_manager.add_object(background, 0)
     game_manager.add_object(alki, 1)
-
-    game_manager.add_object(cursor, 7)
 
 
 def update():

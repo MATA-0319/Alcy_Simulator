@@ -4,7 +4,8 @@ from game_main.config import *
 
 class MouseInput:
     def __init__(self):
-        self.mx, self.my = 0, 0
+        self.input = False
+        self.mx, self.my = WIDTH / 2, HEIGHT / 2
 
     def draw(self):
         pass

@@ -1,4 +1,5 @@
 from game_main.config import *
+from game_mods import play_mode
 
 
 #  화면 효과 클래스
@@ -17,5 +18,6 @@ class Effect:
         self.cam_y = (HEIGHT / 2 - self.m.my) / 10
 
         # 효과 추가 시 아래의 식에 더하여 일괄 처리한다
-        self.ex = self.cam_x
-        self.ey = self.cam_y
+        if self.m.input:
+            self.ex = self.cam_x
+            self.ey = self.cam_y
