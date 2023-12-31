@@ -121,6 +121,7 @@ def move_eye(self):
 
 def blink(self):
     global prev_time, rand_time
+
     if not self.time_measure:
         prev_time = time.time()
         rand_time = random.randint(1, 4)
@@ -154,7 +155,6 @@ def output(self, a):
     match self.state:
         case 'middle':
             a.head_middle.rotate_draw(0, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-
             if not self.blink:
                 a.eye_middle.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
                 a.dot_middle.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
@@ -163,25 +163,19 @@ def output(self, a):
             a.brow_middle.rotate_draw(0, brow_result_x, brow_result_y, self.size, self.size)
 
         case 'right':
-            deg = math.atan2(self.m.my + self.size / 5 - self.head_y, self.m.mx - self.head_x)
-
-            a.head_right.rotate_draw(deg / 10, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-
+            a.head_right.rotate_draw(0, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
             if not self.blink:
-                a.eye_right.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
-                a.dot_right.rotate_draw(deg / 10, dot_result_x, dot_result_y, self.size, self.size)
+                a.eye_right.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+                a.dot_right.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
             else:
-                a.blink_right.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
-            a.brow_right.rotate_draw(deg / 10, brow_result_x, brow_result_y, self.size, self.size)
+                a.blink_right.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+            a.brow_right.rotate_draw(0, brow_result_x, brow_result_y, self.size, self.size)
 
         case 'left':
-            deg = math.atan2(self.head_y - self.size / 5 - self.m.my, self.head_x - self.m.mx)
-
-            a.head_left.rotate_draw(deg / 10, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
-
+            a.head_left.rotate_draw(0, self.head_x + self.e.ex, self.head_y + self.e.ey, self.size, self.size)
             if not self.blink:
-                a.eye_left.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
-                a.dot_left.rotate_draw(deg / 10, dot_result_x, dot_result_y, self.size, self.size)
+                a.eye_left.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+                a.dot_left.rotate_draw(0, dot_result_x, dot_result_y, self.size, self.size)
             else:
-                a.blink_left.rotate_draw(deg / 10, eye_result_x, eye_result_y, self.size, self.size)
-            a.brow_left.rotate_draw(deg / 10, brow_result_x, brow_result_y, self.size, self.size)
+                a.blink_left.rotate_draw(0, eye_result_x, eye_result_y, self.size, self.size)
+            a.brow_left.rotate_draw(0, brow_result_x, brow_result_y, self.size, self.size)
