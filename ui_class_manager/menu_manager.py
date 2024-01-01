@@ -1,5 +1,4 @@
-from pico2d import *
-from game_main.config import *
+from config import *
 from game_mods import play_mode
 from game_work import game_framework
 
@@ -9,7 +8,7 @@ def pause_button_out(self, p):
     # 게임 시작 후에 일시정지 버튼을 보이도록 한다
     if play_mode.mouse_input.input:
         if self.menu_on:
-            p.menu_button.draw(self.menu_pos, self.y + 250, 500, 200)
+            p.menu_button.draw(self.menu_pos, self.y + 250, 450, 200)
         p.font.draw(WIDTH - 380, self.y + 150 + 85, 'ESC', (255, 255, 255))
         p.icon_pause.draw(WIDTH - 110, self.y + 150 + 95, 150, 150)
 
@@ -30,7 +29,7 @@ def pause_out(self, p):
 def info_out(self, p):
     if self.info:
         p.font2.draw(20, self.y + 100, 'Alcyone Simulator by MATA_', (255, 255, 255))
-        p.font2.draw(20, self.y + 60, 'Alpha 0.1', (255, 255, 255))
+        p.font2.draw(20, self.y + 60, 'Indev 0.1', (255, 255, 255))
         p.font2.draw(20, self.y + 20, 'Powered by Pico 2d', (255, 255, 255))
 
 

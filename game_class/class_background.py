@@ -1,7 +1,7 @@
 from pico2d import *
 
 from game_class_manager.background_manager import start_animation_bg, pause_resume_bg
-from game_main.config import *
+from config import *
 
 
 class Background:

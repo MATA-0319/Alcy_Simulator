@@ -1,9 +1,10 @@
 import time
 
-from game_main.config import TS
+from config import TS
 
 running = None
 stack = None
+start_enable = False
 mode = 'play'
 
 

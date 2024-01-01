@@ -5,7 +5,7 @@ import time
 from pico2d import load_image, load_wav
 
 from game_class_manager.alki_output import middle_out, right_out, left_out
-from game_main.config import *
+from config import *
 from game_mods import play_mode
 from game_work import game_framework, game_manager
 from ui_class.class_cursor import Cursor
@@ -38,6 +38,7 @@ def load_alki_file(a):
         a.blink_left = load_image(alki_blink_left)
 
         a.pat_sound = load_wav(pat_sound_file)
+        a.pat_sound.set_volume(128)
 
 
 def init_alki(self, m, e):
@@ -85,7 +86,6 @@ def init_alki(self, m, e):
     self.pause_acc = 0  # 일시정지 전환 시 사용하는 가속값
 
     self.pat_sound_delay = 0  # 사운드 재생 딜레이
-    self.pat_sound_play = True  # 사운드 재생 여부, 중복 재생 방지
 
 
 # 게임 시작 애니에미션

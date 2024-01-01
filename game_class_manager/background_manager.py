@@ -1,4 +1,4 @@
-from game_main.config import WIDTH, HEIGHT
+from config import WIDTH, HEIGHT
 from game_mods import play_mode
 from game_work import game_framework
 

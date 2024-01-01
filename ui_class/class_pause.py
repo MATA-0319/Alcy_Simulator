@@ -1,6 +1,6 @@
 from pico2d import *
 
-from game_main.config import *
+from config import *
 from ui_class_manager.menu_manager import pause_button_out, pause_out, info_out, update_pause_button, \
     update_pause, pause_animation
 
@@ -18,6 +18,7 @@ class Pause:
             Pause.button = load_image(pause_button_image)
             Pause.menu_button = load_image(menu_button_image)
             Pause.button_click = load_wav(button_click_sound)
+            Pause.button_click.set_volume(48)
 
             Pause.font = load_font(font, 100)
             Pause.font2 = load_font(font, 40)
@@ -35,9 +36,9 @@ class Pause:
         self.button_on = [False for i in range(2)]
 
         # 일시정지 버튼 위치, 좌표
-        self.menu_left = WIDTH - 500
+        self.menu_left = WIDTH - 450
         self.menu_right = WIDTH
-        self.menu_pos = WIDTH - 250
+        self.menu_pos = WIDTH - 225
         self.menu_on = False
 
         # 정보 출력 여부

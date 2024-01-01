@@ -1,6 +1,6 @@
 from pico2d import *
 
-from game_main.config import WIDTH
+from config import WIDTH
 from game_work import game_framework
 
 

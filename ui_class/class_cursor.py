@@ -1,9 +1,6 @@
-import math
-
 from pico2d import *
 
-from game_main.config import WIDTH, cursor_image, cursor_hand_image
-from game_work import game_framework
+from config import cursor_image, cursor_hand_image
 from ui_class_manager.cursor_manager import update_cursor, cursor_out
 
 

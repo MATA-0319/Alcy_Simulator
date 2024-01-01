@@ -1,4 +1,4 @@
-from game_main.config import *
+from config import *
 
 
 class MouseInput:

@@ -56,3 +56,9 @@ font = 'res//font//AppleSDGothic.ttf'
 # 사운드 경로
 button_click_sound = 'res//sound//button_click.ogg'
 pat_sound_file = 'res//sound//pat.ogg'
+start_sound_file = 'res//sound//start_sound.ogg'
+
+# 로고 경로
+logo_image = 'res//logo.png'
+start_background_image = 'res//start_background.png'
+mata_logo_image = 'res//mata_logo.png'
