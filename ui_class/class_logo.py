@@ -58,7 +58,7 @@ class Logo:
     def draw(self):
         if self.title_out:
             if self.press_out:
-                self.font.draw(WIDTH / 2 - 140, HEIGHT / 2 - 300, 'Press SPACE', (255, 255, 255))
+                self.font.draw(WIDTH / 2 - 140, HEIGHT / 2, 'Press SPACE', (255, 255, 255))
             Logo.image.opacify(self.op)
             Logo.image.draw(WIDTH / 2, HEIGHT / 2, self.size, self.size)
 
