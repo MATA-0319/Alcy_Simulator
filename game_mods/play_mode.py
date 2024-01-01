@@ -9,11 +9,11 @@ from ui_class.class_mouse_input import MouseInput
 from ui_class.class_pause import Pause
 
 
-def pause_resume():
-    global mouse_input, alki, background
+def pause_resume_esc():
+    global mouse_input, alki, background, pause
 
     match game_framework.mode:
-        case 'play':
+        case 'play':  # to pause
             alki.pause_acc = 5
             alki.head_y = alki.size / 1.8
             alki.body_y = 0
@@ -28,7 +28,7 @@ def pause_resume():
 
             game_framework.mode = 'pause'
 
-        case 'pause':
+        case 'pause':  # to play
             alki.pause_acc = 5
             alki.head_y = alki.size / 1.8 + 252
             alki.body_y = 252
@@ -55,13 +55,13 @@ def handle_events():
         if event.type == SDL_KEYDOWN:
             if event.key == SDLK_ESCAPE:  # 일시정지 메뉴
                 if mouse_input.input:
-                    pause_resume()
+                    pause_resume_esc()
 
             if event.key == SDLK_SPACE:  # 스페이스바로 게임 시작
                 if not mouse_input.input:
                     alki.start = True
 
-        if event.type == SDL_MOUSEMOTION:  # 게임 마우스 입력
+        if event.type == SDL_MOUSEMOTION:  # 게임 마우스 입력, 게임 시작 이후부터 사용 가능
             if mouse_input.input and not (alki.pat and mouse_input.click):
                 mouse_input.mx, mouse_input.my = event.x, HEIGHT - 1 - event.y
 

@@ -52,3 +52,6 @@ icon_info_image = 'res//icon_info.png'
 
 # 폰트 경로
 font = 'res//font//AppleSDGothic.ttf'
+
+# 사운드 경로
+button_click_sound = 'res//sound//button_click.ogg'

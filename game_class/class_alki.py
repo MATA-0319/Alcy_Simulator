@@ -1,7 +1,6 @@
-from game_class.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation, \
+from game_class_manager.alki_manager import set_state, move_eye, head_animation, output, init_alki, start_animation, \
     update_blink, \
-    update_pat, init_deg, pause_animation, return_animation
-from game_class.file_loader import load_alki_file
+    update_pat, init_deg, load_alki_file, pause_resume_alki, update_result
 
 from game_work import game_framework
 
@@ -17,10 +16,10 @@ class Alki:
         output(self, Alki)
 
     def update(self):
+        start_animation(self)
         update_blink(self)
-
-        if self.start:
-            start_animation(self)
+        pause_resume_alki(self)
+        update_result(self)
 
         if self.m.input:
             set_state(self)
@@ -28,13 +27,8 @@ class Alki:
             move_eye(self)
 
         if self.pat and self.m.click:
-            if game_framework.mode == 'play':
+            if game_framework.mode == 'play':  # play 모드에서만 가능
                 update_pat(self)
+        else:
+            init_deg(self)
 
-        init_deg(self)
-
-        if game_framework.mode == 'pause':
-            pause_animation(self)
-
-        if game_framework.mode == 'play':
-            return_animation(self)

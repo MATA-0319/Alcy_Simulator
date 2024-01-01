@@ -1,8 +1,7 @@
 from pico2d import *
 
+from game_class_manager.background_manager import start_animation_bg, pause_resume_bg
 from game_main.config import *
-from game_mods import play_mode
-from game_work import game_framework
 
 
 class Background:
@@ -21,24 +20,7 @@ class Background:
         Background.image.draw(self.x + self.e.ex, self.y + self.e.ey, self.size_x, self.size_y)
 
     def update(self):
-        ts = game_framework.ts
+        start_animation_bg(self)
+        pause_resume_bg(self)
 
-        if play_mode.alki.start:
-            self.size_x += ts * 2
-            self.size_y += ts * 2
-            if self.size_x > WIDTH * 1.5:
-                self.size_x = WIDTH * 1.5
-                self.size_y = HEIGHT * 1.5
 
-        match game_framework.mode:
-            case 'pause':
-                self.y += self.acc * ts
-                self.acc -= ts / 20
-                if self.acc < 0:
-                    self.acc = 0
-
-            case 'play':
-                self.y -= self.acc * ts
-                self.acc -= ts / 20
-                if self.acc < 0:
-                    self.acc = 0
