@@ -28,7 +28,7 @@ class Alki:
 
         if self.pat and self.m.click:
             if game_framework.mode == 'play':  # play 모드에서만 가능
-                update_pat(self)
+                update_pat(self, Alki)
         else:
-            init_deg(self)
+            init_deg(self, Alki)
 

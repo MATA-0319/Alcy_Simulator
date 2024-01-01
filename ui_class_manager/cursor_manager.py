@@ -36,8 +36,8 @@ def update_cursor(self):
 
             # 커서 위치에 따라 사용할 수 있는 기능이 달라진다
             if int(WIDTH / 2 - self.alki.size / 3) <= self.m.mx <= int(WIDTH / 2 + self.alki.size / 3) and \
-                    int(self.alki.head_y + self.alki.size / 50) <= self.m.my <= int(
-                self.alki.head_y + self.alki.size / 4):
+                    int(self.alki.head_y + self.alki.size / 50) <= \
+                    self.m.my <= int(self.alki.head_y + self.alki.size / 4):
                 self.alki.pat = True
             else:
                 self.alki.pat = False

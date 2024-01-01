@@ -11,29 +11,29 @@ PIXEL_RATIO = 80
 TS = (5 * PIXEL_RATIO)  # Time Sync, 게임에서 사용하는 시간 동기화 비율
 
 # 알키 이미지 경로
-alki_body = 'res//alki//body.png'
-alki_head_middle = 'res//alki//head_middle.png'
-alki_head_right = 'res//alki//head_right.png'
-alki_head_left = 'res//alki//head_left.png'
+alki_body = 'res//alcy//body.png'
+alki_head_middle = 'res//alcy//head_middle.png'
+alki_head_right = 'res//alcy//head_right.png'
+alki_head_left = 'res//alcy//head_left.png'
 
-alki_hair = 'res//alki//hair.png'
-alki_tail = 'res//alki//tail.png'
+alki_hair = 'res//alcy//hair.png'
+alki_tail = 'res//alcy//tail.png'
 
-alki_eye_middle = 'res//alki//face//eye_middle.png'
-alki_dot_middle = 'res//alki//face//dot_middle.png'
-alki_brow_middle = 'res//alki//face//brow_middle.png'
+alki_eye_middle = 'res//alcy//face//eye_middle.png'
+alki_dot_middle = 'res//alcy//face//dot_middle.png'
+alki_brow_middle = 'res//alcy//face//brow_middle.png'
 
-alki_eye_right = 'res//alki//face//eye_right.png'
-alki_dot_right = 'res//alki//face//dot_right.png'
-alki_brow_right = 'res//alki//face//brow_right.png'
+alki_eye_right = 'res//alcy//face//eye_right.png'
+alki_dot_right = 'res//alcy//face//dot_right.png'
+alki_brow_right = 'res//alcy//face//brow_right.png'
 
-alki_eye_left = 'res//alki//face//eye_left.png'
-alki_dot_left = 'res//alki//face//dot_left.png'
-alki_brow_left = 'res//alki//face//brow_left.png'
+alki_eye_left = 'res//alcy//face//eye_left.png'
+alki_dot_left = 'res//alcy//face//dot_left.png'
+alki_brow_left = 'res//alcy//face//brow_left.png'
 
-alki_blink_middle = 'res//alki//face//blink_middle.png'
-alki_blink_right = 'res//alki//face//blink_right.png'
-alki_blink_left = 'res//alki//face//blink_left.png'
+alki_blink_middle = 'res//alcy//face//blink_middle.png'
+alki_blink_right = 'res//alcy//face//blink_right.png'
+alki_blink_left = 'res//alcy//face//blink_left.png'
 
 # 배경 경로
 background_image = 'res//background.png'
@@ -55,3 +55,4 @@ font = 'res//font//AppleSDGothic.ttf'
 
 # 사운드 경로
 button_click_sound = 'res//sound//button_click.ogg'
+pat_sound_file = 'res//sound//pat.ogg'

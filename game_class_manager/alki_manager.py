@@ -2,7 +2,7 @@ import math
 import random
 import time
 
-from pico2d import load_image
+from pico2d import load_image, load_wav
 
 from game_class_manager.alki_output import middle_out, right_out, left_out
 from game_main.config import *
@@ -36,6 +36,8 @@ def load_alki_file(a):
         a.blink_middle = load_image(alki_blink_middle)
         a.blink_right = load_image(alki_blink_right)
         a.blink_left = load_image(alki_blink_left)
+
+        a.pat_sound = load_wav(pat_sound_file)
 
 
 def init_alki(self, m, e):
@@ -81,6 +83,9 @@ def init_alki(self, m, e):
     self.num_hair = 0
 
     self.pause_acc = 0  # 일시정지 전환 시 사용하는 가속값
+
+    self.pat_sound_delay = 0  # 사운드 재생 딜레이
+    self.pat_sound_play = True  # 사운드 재생 여부, 중복 재생 방지
 
 
 # 게임 시작 애니에미션
@@ -206,7 +211,7 @@ def update_blink(self):
 
 
 # 쓰다듬기 업데이트
-def update_pat(self):
+def update_pat(self, a):
     ts = game_framework.ts
     self.num_head += ts / 80
     self.num_hair += ts / 80
@@ -216,10 +221,17 @@ def update_pat(self):
     self.deg_head = -math.sin(self.num_head) * 200  # 머리 회전
     self.hair_pos = math.sin(self.num_hair) * 200  # 머리카락 상하 이동
 
+    # 쓰다듬기 사운드 재생
+    self.pat_sound_delay -= ts / 10
+    if self.pat_sound_delay <= 0:
+        a.pat_sound.play(1)
+        self.pat_sound_delay = 50
+
 
 # 쓰다듬기 관련 변수 초기화
-def init_deg(self):
+def init_deg(self, a):
     if not self.m.click:
+        self.pat_sound_delay = 0
         self.deg_head, self.num_head, self.deg_tail, self.num_tail = 0, 0, 0, 0  # 쓰다듬기 안 하면 초기화
         self.num_hair, self.hair_pos = 0, 0
 
