@@ -1,6 +1,12 @@
+import ctypes
 from tkinter import *
 
 # 현재 모니터 크기를 인식하여 자동으로 창 사이즈를 조정한다.
+try:  # >= win 8.1
+    ctypes.windll.shcore.SetProcessDpiAwareness(2)
+except:  # win 8.0 or less
+    ctypes.windll.user32.SetProcessDPIAware()
+
 root = Tk()
 WIDTH = root.winfo_screenwidth()
 HEIGHT = root.winfo_screenheight()
